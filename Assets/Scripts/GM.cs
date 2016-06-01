@@ -40,7 +40,14 @@ public class GM : MonoBehaviour
     public void Setup()
     {
         clonePaddle = Instantiate(paddle, transform.position, Quaternion.identity) as GameObject;
-        Instantiate(bricksPrefab, transform.position, Quaternion.identity);
+        for (int i = 1; i <5; i++)
+        {
+            for (int j = -4; j < 5; j++)
+            {
+                GameObject NewBrick = (GameObject)Instantiate(bricksPrefab, new Vector3(3 * j, 2 * i), Quaternion.identity);
+                NewBrick.GetComponent<brickBehavior>().score = -1+2*i;
+            }
+        }
     }
 
     void CheckGameOver()
@@ -82,10 +89,10 @@ public class GM : MonoBehaviour
         clonePaddle = Instantiate(paddle, transform.position, Quaternion.identity) as GameObject;
     }
 
-    public void DestroyBrick()
+    public void DestroyBrick(int deltascore)
     {
         bricks--;
-        score= score +1;
+        score= score +deltascore;
         scoreText.text = "score: " + score;
         CheckGameOver();
     }
