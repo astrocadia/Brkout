@@ -7,7 +7,7 @@ public class GM : MonoBehaviour
 {
 
     public int lives = 3;
-    public int bricks = 36;
+    public int bricks = 20;
     public int score = 0;
     public float resetDelay = 1f;
     public Text livesText;
@@ -46,21 +46,20 @@ public class GM : MonoBehaviour
             {
                 GameObject NewBrick = (GameObject)Instantiate(bricksPrefab, new Vector3(3 * j, 2 * i), Quaternion.identity);
                 NewBrick.GetComponent<brickBehavior>().score = -1+2*i;
-                bricks = 36;
             }
         }
     }
 
     void CheckGameOver()
     {
-        if (bricks< 1)
+        if (bricks < 1)
         {
             youWon.SetActive(true);
             Time.timeScale = .25f;
             Invoke("Reset", resetDelay);
-}
+        }
 
-        if (lives< 1)
+        if (lives < 1)
         {
             gameOver.SetActive(true);
             Time.timeScale = .25f;
